@@ -1,8 +1,10 @@
 import falcon
 import sys
 
+
 class ThingsResource:
-    def on_get(self, req, resp):
+    @staticmethod
+    def on_get(req, resp):
         """Handles GET requests"""
         resp.body = str(sys.version) + '\n'
 
