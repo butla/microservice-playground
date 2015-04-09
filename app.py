@@ -1,12 +1,10 @@
 import falcon
+import sys
 
 class ThingsResource:
     def on_get(self, req, resp):
         """Handles GET requests"""
-        resp.body = ("\nI've always been more interested in\n"
-                     'the future than in the past.\n'
-                     '\n'
-                     '    ~ Grace Hopper\n\n')
+        resp.body = str(sys.version) + '\n'
 
 app = falcon.API()
 things = ThingsResource()
