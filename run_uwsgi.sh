@@ -1,1 +1,1 @@
-uwsgi --http :9090 --module app:app
+uwsgi --http :9090 --module app:app --enable-threads
