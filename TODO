@@ -1,3 +1,18 @@
 * Check if testing Falcon is easier than Flask.
 * Check performance and memory usage on newest builds of Python.
+* How to elegantly pass authorization headers from REST resources to the models and their sub objects?
 
+BENCHMARK APPLICATION KINDS:
+* simplest possible that only return a string
+* one that does some moderate calculations, like transforming JSON, iteration, etc., not number crunching
+* one that calls a slow data-base or waits to simulate long-lasting connections
+
+BENCHMARK TECHNOLOGIES:
+* Python / WSGI
+* Java / Spring Boot with Tomcat or Jetty
+* NodeJS
+
+PYTHON CONFIGURATIONS TO BENCHMARK:
+* WSGI frameworks: Falcon, Flask-Restful, wheezy.web
+* Servers: uWSGI, Gunicorn
+* Server engines: normal and async (gevent, tornado?, asyncio?)
