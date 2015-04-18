@@ -7,6 +7,11 @@ BENCHMARK APPLICATION KINDS:
 * one that does some moderate calculations, like transforming JSON, iteration, etc., not number crunching
 * one that calls a slow data-base or waits to simulate long-lasting connections
 
+BENCHMARK TEST TYPES:
+* linear user increase
+* linear user increase with peaks
+* constant user number with peaks
+
 BENCHMARK TECHNOLOGIES:
 * Python / WSGI
 * Java / Spring Boot with Tomcat or Jetty
