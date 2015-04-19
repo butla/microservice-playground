@@ -1,13 +1,12 @@
 import falcon
-import sys
 
 
 class ThingsResource:
     @staticmethod
     def on_get(req, resp):
         """Handles GET requests"""
-        resp.body = str(sys.version) + '\n'
-        print("----I'm just saying stuff----")
+        resp.body = 'Hello world\n'
+        # print('just logging')
 
 app = falcon.API()
 things = ThingsResource()

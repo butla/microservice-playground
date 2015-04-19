@@ -1,5 +1,8 @@
 * Check if testing Falcon is easier than Flask.
 * Check performance and memory usage on newest builds of Python.
+* Check memory usage of Spring Boot.
+* Check jar size of Spring Boot.
+* Check the size of Falcon app with dependencies.
 * How to elegantly pass authorization headers from REST resources to the models and their sub objects?
 
 BENCHMARK APPLICATION KINDS:
