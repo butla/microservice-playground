@@ -9,7 +9,7 @@ It will also contain microservices in other technologies for comparison and perf
  * show a good testing configuration (ddt, testtools)
 1. How to elegantly pass authorization headers from REST resources to the models and their sub objects?
  * it seems that pre-request hook that set's some data in the request context and does some preliminary checks is OK.
-1. Does Heroku or Azure or other PaaSes have the mechanism of binding applications to each other or to services?
+1. Does Heroku or Azure or other PaaSes have the mechanism of binding applications to each other or to services? Also look at Google App Engine and Python Anywhere.
 1. How does Cloud Foundry and Heroku assign processor time?
 1. Strict input validation for Python.
 1. Benchmark: Falcon app on Docker / Vagrant / host to check how the rest of benchmarks should be done.
@@ -28,6 +28,7 @@ It will also contain microservices in other technologies for comparison and perf
 1. Async (publish/subscribe, queues, actor models) communication in WSGI apps. Can they go along with HTTP? CF has NATS built in.
 1. Dynamic statistics of apps with ELK stash and CF.
 1. Communication between microservices. Generating clients from Swagger dosc? Testing contracts and integration.
+1. How to set up your own PyPI (Python Package Index) for your organization?
 
 ## Findings
 Nothing's here yet...
