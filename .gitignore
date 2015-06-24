@@ -1,6 +1,7 @@
+falcon_app/.vagrant/
+
 # IDEA hidden files
 .idea/
-
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
