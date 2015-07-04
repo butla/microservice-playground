@@ -8,9 +8,16 @@ It will also contain microservices in other technologies for comparison and perf
 ## Ogólne
 
 ### Ustalone
-* ta prezentacja ma dać ludziom, który zaczynają wprowadzać mikroserwisy (albo tym, którzy już to zrobili, ale coś im nie idzie), zwięzłe wskazówki do rozwiązania praktycznych problemów
-* dla nowych: jeśli macie rozwiązania, albo ich kombinacje, których jeszcze nie widzieliście, to może warto przygotować prezentację
-* Fajnie mieć tablicę z architekturą komponentów
+1. ta prezentacja ma dać ludziom, który zaczynają wprowadzać mikroserwisy (albo tym, którzy już to zrobili, ale coś im nie idzie), zwięzłe wskazówki do rozwiązania praktycznych problemów
+1. dla nowych: jeśli macie rozwiązania, albo ich kombinacje, których jeszcze nie widzieliście, to może warto przygotować prezentację
+1. Fajnie mieć tablicę z architekturą komponentów
+1. Wybór Falcona i uWSGI do tworzenia apek (bo dlaczego akurat taki framework spośród dziesiątek?)
+ * backend w mikroserwisach powinien być prosty i bezstanowy - nie potrzebowałem jakiś rozbudowanych feature'ów
+ * prostota jest zaletą; jasno widać przepływ (Flask robi kilka dziwnych rzeczy, np. wsadza body w inną zmienną w zależności od content type)
+ * Falcon jest też dość nowy i dobrze zaprojektowany (Flask był dynamicznie rozbudowywany).
+ * Falcon jest szybki (pokaż benchmark z innymi Pythonami)
+ * Łatwo doklejać swoją funkcjonalność do Falcona przez jego prostotę.
+ * uWSGI jest szybkoie (pokazać benchmarki).
 
 ### TODO
 1. (Iza) Does Heroku or Azure or other PaaSes have the mechanism of binding applications to each other or to services? Also look at Google App Engine and Python Anywhere.
@@ -21,14 +28,14 @@ It will also contain microservices in other technologies for comparison and perf
 ## What infrastructure and automation you need to set up to go along smoothly;
 
 ### Ustalone
-* Opisać wersjonowanie apek
-* testy w testowym środowisku po pushu. Powinny wracać do ostatniego stabilnego, jeśli coś pójdzie nie tak. Co jeśli trzeba wcisnąć na raz dwie zmiany?
-* Pokazać jak może wygląda autoryzacja/uwierzytelnienie z Oauthem i PyJWT.
-* jak robić reuse kodu w innych komponentach? Może być swój własny PyPI (Python Package Index)
-* jakie artefakty i gdzie przechowywać?
+1. Opisać wersjonowanie apek
+1. testy w testowym środowisku po pushu. Powinny wracać do ostatniego stabilnego, jeśli coś pójdzie nie tak. Co jeśli trzeba wcisnąć na raz dwie zmiany?
+1. Pokazać jak może wygląda autoryzacja/uwierzytelnienie z Oauthem i PyJWT.
+1. jak robić reuse kodu w innych komponentach? Może być swój własny PyPI (Python Package Index)
+1. jakie artefakty i gdzie przechowywać?
 
 ### TODO
-1. Check if testing Falcon is easier than Flask.
+1. Check if testing Falcon is easier than Flask by writing a sample Falcon app (downloader).
  * it seems so with, Falcom being more elegant, but Flask has contexts and stuff.
  * show a good testing configuration (ddt, testtools)
 1. Proper versioning
@@ -44,9 +51,9 @@ It will also contain microservices in other technologies for comparison and perf
 ## How thinking in PaaS terms can lead to robust and scalable designs
 
 ### Ustalone
-* stosować zalecenie pojedynczego źródła prawdy, żeby można było wszystko robić asynchronicznie | ewentualnie tylko jeden może pisać
-* Z reusem mikroserwisów jest jak z klasami: to, że wydzieliłeś nie znaczy, że jest reusable (prezentacja o reusable code). W sumie nie wszystkie muszą być teusable
-* Trzeba używać frameworku, który ma mało magii i można że stacka wyczytać, co poszło nie tak.
+1. stosować zalecenie pojedynczego źródła prawdy, żeby można było wszystko robić asynchronicznie | ewentualnie tylko jeden może pisać
+1. Z reusem mikroserwisów jest jak z klasami: to, że wydzieliłeś nie znaczy, że jest reusable (prezentacja o reusable code). W sumie nie wszystkie muszą być teusable
+1. Trzeba używać frameworku, który ma mało magii i można że stacka wyczytać, co poszło nie tak.
 
 ### TODO
 1. Async (publish/subscribe, queues, actor models) communication in WSGI apps. Can they go along with HTTP? CF has NATS built in. Maybe also look at ZMQ and AMQP. What's the security model for queues? Can you send tokens through it? Will they be encrypted?
@@ -56,10 +63,10 @@ It will also contain microservices in other technologies for comparison and perf
 ## How to get real time metrics of your apps
 
 ### Ustalone
-* Co to ELK stack?
-* Co to Logsearch?
-* Jak zbierać logi do Logsearcha?
-* Co można z nich wyczytać i jak to zrobić?
+1. Co to ELK stack?
+1. Co to Logsearch?
+1. Jak zbierać logi do Logsearcha?
+1. Co można z nich wyczytać i jak to zrobić?
 
 ### TODO
 1. Sprawdzić, czy są jakieś tricki przy stawianiu Logsearcha. Pewnie są i trzeba się zastanowić, czy nie można ich pominąć.
@@ -71,15 +78,15 @@ It will also contain microservices in other technologies for comparison and perf
 ## What makes Python good for microservice
 
 ### Ustalone
-* Swoboda testowania i pisania kodu
-* dobra obiektowość, ale do niczego nie jesteś zmuszany; jak masz coś wymokować, to można się osrać np. w Jacie a tu jest spoko
-* spring nie ma przewagi przydatnych feature'ów
-* krótki development, możliwość szybkich zmian w architekturze, łatwe prototypowanie
-* łatwiejsze zarządzanie strukturami danych (mapy, zbiory,listy)
-* wystarczający performance?
-* zwięzłość dająca czytelność
-* zaawansowane struktury języka - domknięcia, metaklasy (ale to już jest wszędzie poza Javą)
-* niestety brak typowania zwiększa skomplikowanie wstępnej walidacji danych, ale bez niego też byłaby potrzebna
+1. Swoboda testowania i pisania kodu
+1. dobra obiektowość, ale do niczego nie jesteś zmuszany; jak masz coś wymokować, to można się osrać np. w Jacie a tu jest spoko
+1. spring nie ma przewagi przydatnych feature'ów
+1. krótki development, możliwość szybkich zmian w architekturze, łatwe prototypowanie
+1. łatwiejsze zarządzanie strukturami danych (mapy, zbiory,listy)
+1. wystarczający performance?
+1. zwięzłość dająca czytelność
+1. zaawansowane struktury języka - domknięcia, metaklasy (ale to już jest wszędzie poza Javą)
+1. niestety brak typowania zwiększa skomplikowanie wstępnej walidacji danych, ale bez niego też byłaby potrzebna
 
 ### TODO
 1. (Iza) Strict input validation for Python - how to do it? Look into Cerberus and other libraries. Can it work with Swagger to avoid schema definition duplication?
@@ -91,10 +98,10 @@ It will also contain microservices in other technologies for comparison and perf
 ### Ustalone
 Wszystko takie mniej więcej. I tak nie chodzi głównie o wydajność, a o to, żeby system działał sprawnie i mógł być szybko rozwijany.
 Jak już się ustabilizuje i będziemy mieli miliony klientów to można newralgiczne komponenty zoptymalizować lub przepisać na coś szybszego - taka zaleta mikroserwisów.
-* Dlaczego wybrałem taką a nie inną konfigurację dla Pythona?
-* Jak ma do Springa/NodeJS/Go?
-* Co ze zużyciem pamięci?
-* Czas wykonywania się testów (przynajmniej dużo szybciej niż Springowe).
+1. Dlaczego wybrałem taką a nie inną konfigurację dla Pythona?
+1. Jak ma do Springa/NodeJS/Go?
+1. Co ze zużyciem pamięci?
+1. Czas wykonywania się testów (przynajmniej dużo szybciej niż Springowe).
 
 ### TODO
 1. (Iza) How does Cloud Foundry and Heroku assign processor time? Should we do tests on one or a few processors (of a VM)?
@@ -117,18 +124,18 @@ Jak już się ustabilizuje i będziemy mieli miliony klientów to można newralg
 1. Benchmark: test and deployment times for Spring and Python
 
 # Findings
-* Docker can throttle CPU time by relative share size or by assigning to a certain core (or both). More [here](https://goldmann.pl/blog/2014/09/11/resource-management-in-docker/)
+1. Docker can throttle CPU time by relative share size or by assigning to a certain core (or both). More [here](https://goldmann.pl/blog/2014/09/11/resource-management-in-docker/)
 
 # Benchmarking
 Performance tests done with Gatling.
 
 ## Test applications
-* simplest possible that only returns a string
-* one that does some moderate calculations, like transforming JSON, iteration, etc., not number crunching
-* one that calls a slow data-base or waits to simulate long-lasting connections
+1. simplest possible that only returns a string
+1. one that does some moderate calculations, like transforming JSON, iteration, etc., not number crunching
+1. one that calls a slow data-base or waits to simulate long-lasting connections
 
 ## Test types
-* linear user increase
-* linear user increase with peaks
-* constant user number with peaks
+1. linear user increase
+1. linear user increase with peaks
+1. constant user number with peaks
 
