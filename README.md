@@ -3,111 +3,107 @@ microservice-playground
 A project for Python/Falcon microservice that will be used to find best practices for development of such applications.
 It will also contain microservices in other technologies for comparison and performance test projects.
 
-# Presentation draft
+# Układ prezentacji
 
-## Ogólne
-
-### Ustalone
+## Czym będzie ta prezentacja
+1. Bardzo krótkie przedstawienie mikroserwisów i PaaSa. Jak ludzi zaciekawi, to sobie doczytają.
 1. ta prezentacja ma dać ludziom, który zaczynają wprowadzać mikroserwisy (albo tym, którzy już to zrobili, ale coś im nie idzie), zwięzłe wskazówki do rozwiązania praktycznych problemów
-1. dla nowych: jeśli macie rozwiązania, albo ich kombinacje, których jeszcze nie widzieliście, to może warto przygotować prezentację
-1. Fajnie mieć tablicę z architekturą komponentów
-1. Wybór Falcona i uWSGI do tworzenia apek (bo dlaczego akurat taki framework spośród dziesiątek?)
- * backend w mikroserwisach powinien być prosty i bezstanowy - nie potrzebowałem jakiś rozbudowanych feature'ów
- * prostota jest zaletą; jasno widać przepływ (Flask robi kilka dziwnych rzeczy, np. wsadza body w inną zmienną w zależności od content type)
- * Falcon jest też dość nowy i dobrze zaprojektowany (Flask był dynamicznie rozbudowywany).
- * Falcon jest szybki (pokaż benchmark z innymi Pythonami)
- * Łatwo doklejać swoją funkcjonalność do Falcona przez jego prostotę.
- * uWSGI jest szybkoie (pokazać benchmarki).
+1. Skupię się na przedstawieniu konkretnych, Pythonowych przykładów, które sprawdziły się dla nas (lub mam nadzieję, że się sprawdzą). Wspomnę trochę o szerszym kontekście i wskażę dalsze źródła.
+1. Nie zdążę, niestety, opowiedzieć o wszystkim, ale jeśli was zaciekawi tematyka mikroserwisów, to dam wam Pythonowe kawałki potrzebne do pracy.
 
-### TODO
-1. (Iza) Does Heroku or Azure or other PaaSes have the mechanism of binding applications to each other or to services? Also look at Google App Engine and Python Anywhere.
-1. Co mówią księgi?
+## W skrócie o mikroserwisach
+1. definicja z książki
+1. co to 12-factor app
+1. Co nam dają mikroserwisy?
 
+## W skrócie o PaaSie
+1. Co nam daje PaaS?
+ * łatwe skalowanie
+ * routing
+ * łatwy deployment
+ * weź jakąś oficjalną propagandę
+1. Są różne PaaSy, ja będę pokazywał na przykładzie Cloud Foundry. Czym się charakteryzuje CF w skrócie? 
 
+## Ogólny zarys dobrego rozwiązania z microservice'ami
+1. dobre testy jednostkowe
+1. testy jednoskowe
+1. monitoring na produkcji (z latającymi co jakiś czas testami)
 
-## What infrastructure and automation you need to set up to go along smoothly;
-
-### Ustalone
-1. Opisać wersjonowanie apek
-1. testy w testowym środowisku po pushu. Powinny wracać do ostatniego stabilnego, jeśli coś pójdzie nie tak. Co jeśli trzeba wcisnąć na raz dwie zmiany?
-1. Pokazać jak może wygląda autoryzacja/uwierzytelnienie z Oauthem i PyJWT.
-1. jak robić reuse kodu w innych komponentach? Może być swój własny PyPI (Python Package Index)
-1. jakie artefakty i gdzie przechowywać?
-
-### TODO
-1. Check if testing Falcon is easier than Flask by writing a sample Falcon app (downloader).
- * it seems so with, Falcom being more elegant, but Flask has contexts and stuff.
- * show a good testing configuration (ddt, testtools)
-1. Proper versioning
- * setting VERSION in the manifest or in environment after deployment
-1. Manageable communication between microservices. Generating clients from Swagger docs? Testing contracts and integration.
-1. How to elegantly pass authorization headers from REST resources to the models and their sub objects?
- * it seems that pre-request hook that set's some data in the request context and does some preliminary checks is OK.
-1. How to set up your own PyPI (Python Package Index) for your organization?
-1. What artifacts to store? How and where to store them? And use them?
-
-
-
-## How thinking in PaaS terms can lead to robust and scalable designs
-
-### Ustalone
+## General microservice work tips
+1. *TODO (Iza)* Does Heroku or Azure or other PaaSes have the mechanism of binding applications to each other or to services? Also look at Google App Engine and Python Anywhere.
+1. *TODO (Iza)* How does Cloud Foundry and Heroku assign processor time? Should we do tests on one or a few processors (of a VM)?
+1. Stosować się oczywiście do 12-factor app i różnych mądrych porad (np. o testowaniu od Fowlera)
+1. Stosować się do przykazań RESTa (kiedy używa się RESTa, co pewnie będzie się najczęściej działo)
+1. Stosować umiar przy stosowaniu się do mądrych porad.
 1. stosować zalecenie pojedynczego źródła prawdy, żeby można było wszystko robić asynchronicznie | ewentualnie tylko jeden może pisać
-1. Z reusem mikroserwisów jest jak z klasami: to, że wydzieliłeś nie znaczy, że jest reusable (prezentacja o reusable code). W sumie nie wszystkie muszą być teusable
+1. Z reusem mikroserwisów jest jak z klasami: to, że wydzieliłeś nie znaczy, że jest reusable (prezentacja o reusable code). W sumie nie wszystkie muszą być reusable.
 1. Trzeba używać frameworku, który ma mało magii i można że stacka wyczytać, co poszło nie tak.
+1. Używać frameworku, do którego łatwo robić testy jednostkowe.
+1. Asynchroniczne wołanie/kolejki/service bus mogą się przydać w wielu sytuacjach. Zmniejszają liczbę bezpośrednich powiązań ułatwiając testowanie modułowe, chociaż nie są bez problemów (gdzie się podziała moja wiadomość?). Oczywiście trzeba je stosować tam, gdzie faktycznie się nadają. Czasem trzeba wołać asynchronicznie.
+1. Fajnie mieć fizyczną tablicę z architekturą komponentów. Jak tylko ktoś coś zmienia to nakładamy. Jak nie siedzicie w jednym miejscu, to jakiś graf na wiki (np. Visio).
 
-### TODO
-1. Async (publish/subscribe, queues, actor models) communication in WSGI apps. Can they go along with HTTP? CF has NATS built in. Maybe also look at ZMQ and AMQP. What's the security model for queues? Can you send tokens through it? Will they be encrypted?
-
-
-
-## How to get real time metrics of your apps
-
-### Ustalone
-1. Co to ELK stack?
-1. Co to Logsearch?
-1. Jak zbierać logi do Logsearcha?
-1. Co można z nich wyczytać i jak to zrobić?
-
-### TODO
-1. Sprawdzić, czy są jakieś tricki przy stawianiu Logsearcha. Pewnie są i trzeba się zastanowić, czy nie można ich pominąć.
-1. Jak wysyłać logi do Logsearcha?
-1. Jak formatować logi, żeby coś z nich ciekawego wyszło.
-
-
-
-## What makes Python good for microservice
-
-### Ustalone
+## Dlaczego Python się nadaje?
 1. Swoboda testowania i pisania kodu
 1. dobra obiektowość, ale do niczego nie jesteś zmuszany; jak masz coś wymokować, to można się osrać np. w Jacie a tu jest spoko
 1. spring nie ma przewagi przydatnych feature'ów
 1. krótki development, możliwość szybkich zmian w architekturze, łatwe prototypowanie
 1. łatwiejsze zarządzanie strukturami danych (mapy, zbiory,listy)
-1. wystarczający performance?
 1. zwięzłość dająca czytelność
 1. zaawansowane struktury języka - domknięcia, metaklasy (ale to już jest wszędzie poza Javą)
 1. niestety brak typowania zwiększa skomplikowanie wstępnej walidacji danych, ale bez niego też byłaby potrzebna
+1. wystarczający performance? *TODO* trzeba zrobić benchmarki
+ * Wszystko takie mniej więcej. I tak nie chodzi głównie o wydajność, a o to, żeby system działał sprawnie i mógł być szybko rozwijany.
+ * Jak już się ustabilizuje i będziemy mieli miliony klientów to można newralgiczne komponenty zoptymalizować lub przepisać na coś szybszego - taka zaleta mikroserwisów.
+ * *TODO* performancje Falcona z uWSGI (czyli ogólnie pojętej konfiguracji pythonowej) w porównaniu ze Springiem, NodeJSem i Go.
+ * *TODO* zużycie pamięci pomiędzy zawodnikami jak wyżej.
+ * Czas wykonywania się testów (przynajmniej dużo szybciej niż Springowe).
+ * Nie używałem żadnych optymalizatorów w stylu PyPy, Nuitki, Cythona itp., a to mogłoby trochę poprawić wyniki.
 
-### TODO
-1. (Iza) Strict input validation for Python - how to do it? Look into Cerberus and other libraries. Can it work with Swagger to avoid schema definition duplication?
+## Taming microservices and PaaS with Python
 
+### Selected language version, framework and server
+You can, of course, use other Python version and another framework and be successful, I just find this configuration really neat.
+1. *TODO* prepare sample Falcon app (downloader)
+1. *TODO* show good falcon unit testing configuration (ddt, testtools)
+1. Można w końcu Pythona 3!!! Bo mamy do czynienia z małymi (względnie) programami i można poeksperymentować. Poza tym Python 3 jest już bardzo szeroko wspierany przez poważne projekty. Wyjątkiem są niskopoziomowe, jak Gevent.
+1. Falcon (bo dlaczego akurat taki framework spośród dziesiątek?)
+ * backend w mikroserwisach powinien być prosty i bezstanowy - nie potrzebowałem jakiś rozbudowanych feature'ów
+ * prostota jest zaletą; jasno widać przepływ (Flask robi kilka dziwnych rzeczy, np. wsadza body w inną zmienną w zależności od content type)
+ * Falcon jest też dość nowy i dobrze zaprojektowany (Flask był dynamicznie rozbudowywany).
+ * Falcon jest szybki (pokaż benchmark z innymi Pythonami)
+ * Łatwo doklejać swoją funkcjonalność do Falcona przez jego prostotę.
+1. uWSGI - bo jest szybki i lekki
 
+### Communications
+1. *TODO (Iza)* Strict input validation for Python - how to do it? Look into Cerberus, Colander and maybe other libraries. Can it work with Swagger to avoid schema definition duplication?
+1. *TODO* Manageable communication between microservices. Generating clients from Swagger docs? Testing contracts and integration.
+1. *TODO* Async (publish/subscribe, queues, actor models) communication in WSGI apps. Can they go along with HTTP? CF has NATS built in. Maybe also look at ZMQ and AMQP. What's the security model for queues? Can you send tokens through it? Will they be encrypted?
+1. *TODO* Użycie biblioteki retrying albo tej drugiej do uodpornienia naszych aplikacji
 
-## What is Python's performance relative to some alternatives.
+### Testing and automation (Quality Assurance)
+1. *TODO* dać przykład testów integracyjnych/kontraktowych
+1. *TODO* Testy E2E w testowym środowisku po pushu. Powinny wracać do ostatniego stabilnego, jeśli coś pójdzie nie tak? Co jeśli trzeba wcisnąć na raz dwie zmiany?
+1. *TODO* monitoring produkcji, okazyjne testy itp.
+1. jak robić reuse kodu w innych komponentach? Może być swój własny PyPI (Python Package Index). Jest mowa o tym, że nie powinno się dzielić kodu, bo wprowadza to zależności między komponentami. Ale różne komponenty mogą być zależne od różnych wersji. Wtedy jest spoko.
+1. Tricki z Pythonowym buildpackiem. Vendorowanie, co może iść nie tak? Modyfikacja buildpacka.
+1.  What artifacts to store? How and where to store them? And use them?
 
-### Ustalone
-Wszystko takie mniej więcej. I tak nie chodzi głównie o wydajność, a o to, żeby system działał sprawnie i mógł być szybko rozwijany.
-Jak już się ustabilizuje i będziemy mieli miliony klientów to można newralgiczne komponenty zoptymalizować lub przepisać na coś szybszego - taka zaleta mikroserwisów.
-1. Dlaczego wybrałem taką a nie inną konfigurację dla Pythona?
-1. Jak ma do Springa/NodeJS/Go?
-1. Co ze zużyciem pamięci?
-1. Czas wykonywania się testów (przynajmniej dużo szybciej niż Springowe).
+### Misc
+1. *TODO* Opisać wersjonowanie apek - VERSION w manifescie jest spoko?
+1. *TODO* Pokazać jak może wygląda autoryzacja/uwierzytelnienie z Oauthem i PyJWT.
+1. *TODO* How to elegantly pass authorization headers from REST resources to the models and their sub objects?
+ * it seems that pre-request hook that set's some data in the request context and does some preliminary checks is OK.
 
-### TODO
-1. (Iza) How does Cloud Foundry and Heroku assign processor time? Should we do tests on one or a few processors (of a VM)?
-1. Benchmarki z "Optional Todos", ale tylko niektóre.
+### Metrics and log aggregation
+1. Co to ELK stack?
+1. Co to Logsearch?
+1. *TODO* Jak zbierać logi do Logsearcha?
+1. Co można z nich wyczytać i jak to zrobić?
+1. *TODO* Sprawdzić, czy są jakieś tricki przy stawianiu Logsearcha. Pewnie są i trzeba się zastanowić, czy nie można ich pominąć.
+1. *TODO* Jak formatować logi, żeby coś z nich ciekawego wyszło.
 
-
+## Final remarks
+1. dla nowych: jeśli macie rozwiązania, albo ich kombinacje, których jeszcze nie widzieliście, to może warto przygotować prezentację
 
 
 # Optional Todos
