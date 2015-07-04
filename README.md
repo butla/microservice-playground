@@ -63,6 +63,7 @@ It will also contain microservices in other technologies for comparison and perf
 
 ### Selected language version, framework and server
 You can, of course, use other Python version and another framework and be successful, I just find this configuration really neat.
+
 1. *TODO* prepare sample Falcon app (downloader)
 1. *TODO* show good falcon unit testing configuration (ddt, testtools)
 1. Można w końcu Pythona 3!!! Bo mamy do czynienia z małymi (względnie) programami i można poeksperymentować. Poza tym Python 3 jest już bardzo szeroko wspierany przez poważne projekty. Wyjątkiem są niskopoziomowe, jak Gevent.
