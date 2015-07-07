@@ -7,6 +7,7 @@ It will also contain microservices in other technologies for comparison and perf
 
 ## Czym będzie ta prezentacja
 1. Bardzo krótkie przedstawienie mikroserwisów i PaaSa. Jak ludzi zaciekawi, to sobie doczytają.
+1. Nie będę rozprawiał o ogólnych zasadach i uzasadnieniu nakazów i rozwiazań. Do tego dojdziecie sami. Ja pokażę jak można je zaimplementować. Wtedy jak już dojdziecie do tego, że czegoś potrzebujecie to będziecie mieli przykład.
 1. ta prezentacja ma dać ludziom, który zaczynają wprowadzać mikroserwisy (albo tym, którzy już to zrobili, ale coś im nie idzie), zwięzłe wskazówki do rozwiązania praktycznych problemów
 1. Skupię się na przedstawieniu konkretnych, Pythonowych przykładów, które sprawdziły się dla nas (lub mam nadzieję, że się sprawdzą). Wspomnę trochę o szerszym kontekście i wskażę dalsze źródła.
 1. Nie zdążę, niestety, opowiedzieć o wszystkim, ale jeśli was zaciekawi tematyka mikroserwisów, to dam wam Pythonowe kawałki potrzebne do pracy.
@@ -22,7 +23,8 @@ It will also contain microservices in other technologies for comparison and perf
  * routing
  * łatwy deployment
  * weź jakąś oficjalną propagandę
-1. Są różne PaaSy, ja będę pokazywał na przykładzie Cloud Foundry. Czym się charakteryzuje CF w skrócie? 
+1. Są różne PaaSy, ja będę pokazywał na przykładzie Cloud Foundry. Czym się charakteryzuje CF w skrócie?
+1. Jest trochę [PaaSów do wyboru] (http://www.paasify.it/vendors)
 
 ## Ogólny zarys dobrego rozwiązania z microservice'ami
 1. dobre testy jednostkowe
@@ -65,7 +67,6 @@ It will also contain microservices in other technologies for comparison and perf
 You can, of course, use other Python version and another framework and be successful, I just find this configuration really neat.
 
 1. *TODO* prepare sample Falcon app (downloader)
-1. *TODO* show good falcon unit testing configuration (ddt, testtools)
 1. Można w końcu Pythona 3!!! Bo mamy do czynienia z małymi (względnie) programami i można poeksperymentować. Poza tym Python 3 jest już bardzo szeroko wspierany przez poważne projekty. Wyjątkiem są niskopoziomowe, jak Gevent.
 1. Falcon (bo dlaczego akurat taki framework spośród dziesiątek?)
  * backend w mikroserwisach powinien być prosty i bezstanowy - nie potrzebowałem jakiś rozbudowanych feature'ów
@@ -73,6 +74,7 @@ You can, of course, use other Python version and another framework and be succes
  * Falcon jest też dość nowy i dobrze zaprojektowany (Flask był dynamicznie rozbudowywany).
  * Falcon jest szybki (pokaż benchmark z innymi Pythonami)
  * Łatwo doklejać swoją funkcjonalność do Falcona przez jego prostotę.
+ * Pokazać przykładowy test Falcona, jeśli do tego czasu nie będzie jeszcze w oficjalnej dokumentacji.
 1. uWSGI - bo jest szybki i lekki
 
 ### Communications
@@ -86,8 +88,9 @@ You can, of course, use other Python version and another framework and be succes
 1. *TODO* Testy E2E w testowym środowisku po pushu. Powinny wracać do ostatniego stabilnego, jeśli coś pójdzie nie tak? Co jeśli trzeba wcisnąć na raz dwie zmiany?
 1. *TODO* monitoring produkcji, okazyjne testy itp.
 1. jak robić reuse kodu w innych komponentach? Może być swój własny PyPI (Python Package Index). Jest mowa o tym, że nie powinno się dzielić kodu, bo wprowadza to zależności między komponentami. Ale różne komponenty mogą być zależne od różnych wersji. Wtedy jest spoko.
+1. Testowanie wydajności z Gatlingiem (pythonowy Locust niestety nie ma takich możliwości modelowania ruchu i tak rozległych statystyk)
 1. Tricki z Pythonowym buildpackiem. Vendorowanie, co może iść nie tak? Modyfikacja buildpacka.
-1.  What artifacts to store? How and where to store them? And use them?
+1. What artifacts to store? How and where to store them? And use them?
 
 ### Misc
 1. *TODO* Opisać wersjonowanie apek - VERSION w manifescie jest spoko?
