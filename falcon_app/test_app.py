@@ -4,6 +4,8 @@ from falcon import testing
 
 import app
 
+# TODO: Pokaz trick z importowaniem apki dopiero po ustawieniu sciemnianego kontekstu do testow
+# Albo moze jakos inaczej konfiguracje rozwiazac
 
 @ddt.ddt
 class SampleTest(testing.TestBase):

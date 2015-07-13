@@ -83,8 +83,6 @@ You can, of course, use other Python version and another framework and be succes
 1. *TODO* Async (publish/subscribe, queues, actor models) communication in WSGI apps. Can they go along with HTTP? CF has NATS built in. Maybe also look at ZMQ and AMQP. What's the security model for queues? Can you send tokens through it? Will they be encrypted?
 1. *TODO* Użycie biblioteki retrying albo tej drugiej do uodpornienia naszych aplikacji
 
-### Logging
-
 ### Testing and automation (Quality Assurance)
 1. *TODO* Pełny proces budowania i wypchnięcia apki, że wszystkimi komendami (tox, cf push). Tox też może odpalać analizę statyczną i Coverage. Można ustawić fail powyżej iluś błędów statycznych i poniżej jakiegoś pokrycia. Może też testy Gatlingiem i sprawdzenie pułapu wydajności.
 1. *TODO* dać przykład testów integracyjnych/kontraktowych. Może docker-compose do integracyjnych? Dobrze jak najwięcej jednostkowych z mockami, ale trzeba w końcu zrobić test, który pokaże, że nasze mocki udają dobry kontrakt.
