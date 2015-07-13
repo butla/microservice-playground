@@ -83,28 +83,34 @@ You can, of course, use other Python version and another framework and be succes
 1. *TODO* Async (publish/subscribe, queues, actor models) communication in WSGI apps. Can they go along with HTTP? CF has NATS built in. Maybe also look at ZMQ and AMQP. What's the security model for queues? Can you send tokens through it? Will they be encrypted?
 1. *TODO* Użycie biblioteki retrying albo tej drugiej do uodpornienia naszych aplikacji
 
+### Logging
+
 ### Testing and automation (Quality Assurance)
-1. *TODO* dać przykład testów integracyjnych/kontraktowych
+1. *TODO* Pełny proces budowania i wypchnięcia apki, że wszystkimi komendami (tox, cf push). Tox też może odpalać analizę statyczną i Coverage. Można ustawić fail powyżej iluś błędów statycznych i poniżej jakiegoś pokrycia. Może też testy Gatlingiem i sprawdzenie pułapu wydajności.
+1. *TODO* dać przykład testów integracyjnych/kontraktowych. Może docker-compose do integracyjnych? Dobrze jak najwięcej jednostkowych z mockami, ale trzeba w końcu zrobić test, który pokaże, że nasze mocki udają dobry kontrakt.
 1. *TODO* Testy E2E w testowym środowisku po pushu. Powinny wracać do ostatniego stabilnego, jeśli coś pójdzie nie tak? Co jeśli trzeba wcisnąć na raz dwie zmiany?
-1. *TODO* monitoring produkcji, okazyjne testy itp.
+1. *TODO* monitoring produkcji (Zabbix), okazyjne testy itp.
+1. Tox może mieć jedną konfigurację, bo można sobie zażyczyć konkretny kontener.
+1. Poza Toxem można by pewnie używać jakiegoś Pavera albo Buildouta, ale Tox nam robi maszynę wirtualną.
 1. jak robić reuse kodu w innych komponentach? Może być swój własny PyPI (Python Package Index). Jest mowa o tym, że nie powinno się dzielić kodu, bo wprowadza to zależności między komponentami. Ale różne komponenty mogą być zależne od różnych wersji. Wtedy jest spoko.
 1. Testowanie wydajności z Gatlingiem (pythonowy Locust niestety nie ma takich możliwości modelowania ruchu i tak rozległych statystyk)
 1. Tricki z Pythonowym buildpackiem. Vendorowanie, co może iść nie tak? Modyfikacja buildpacka.
 1. What artifacts to store? How and where to store them? And use them?
 
 ### Misc
-1. *TODO* Opisać wersjonowanie apek - VERSION w manifescie jest spoko?
+1. *TODO* Opisać wersjonowanie apek - VERSION w manifescie jest spoko? Każda wersja musi móc być releasowana. Bumpversion w hooku? A jak podbić bardziej znaczący numer?
 1. *TODO* Pokazać jak może wygląda autoryzacja/uwierzytelnienie z Oauthem i PyJWT.
 1. *TODO* How to elegantly pass authorization headers from REST resources to the models and their sub objects?
  * it seems that pre-request hook that set's some data in the request context and does some preliminary checks is OK.
 
 ### Metrics and log aggregation
+1. Cloud Foundry (i inne PaaSy) zapewniają nam eleganckie logowanie przez zbieranie std out i err.
+1. Pokazać, jak zestawić loggera, żeby gadał na error i std.out (zmienna środowiskowa i czytanie jej)
 1. Co to ELK stack?
-1. Co to Logsearch?
-1. *TODO* Jak zbierać logi do Logsearcha?
+1. Co to Logsearch? Jakby co, to zbiera wszystkie logi. To dlatego, że są one i tak już wszystkie zbierane przez coś zwanego Loggregatorem.
 1. Co można z nich wyczytać i jak to zrobić?
-1. *TODO* Sprawdzić, czy są jakieś tricki przy stawianiu Logsearcha. Pewnie są i trzeba się zastanowić, czy nie można ich pominąć.
 1. *TODO* Jak formatować logi, żeby coś z nich ciekawego wyszło.
+1. Logsearch jest konfigurowany przez bosh-release, dlatego stoi poza standardowymi kontenerami, bezpośrednio na VMkach. Nowy filtry Logstasha muszą być dodane przez taką konfiguracje i zredeployowane.
 
 ## Final remarks
 1. dla nowych: jeśli macie rozwiązania, albo ich kombinacje, których jeszcze nie widzieliście, to może warto przygotować prezentację

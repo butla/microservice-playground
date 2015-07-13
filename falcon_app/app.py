@@ -1,8 +1,6 @@
 import falcon
 import json
 
-from io import TextIOWrapper, BufferedReader
-
 class SampleResource:
     @staticmethod
     def on_get(req, resp):
