@@ -75,6 +75,7 @@ You can, of course, use other Python version and another framework and be succes
  * Falcon jest szybki (pokaż benchmark z innymi Pythonami)
  * Łatwo doklejać swoją funkcjonalność do Falcona przez jego prostotę.
  * Pokazać przykładowy test Falcona, jeśli do tego czasu nie będzie jeszcze w oficjalnej dokumentacji.
+ * You can get to know it in one afternoon
 1. uWSGI - bo jest szybki i lekki
 
 ### Communications
