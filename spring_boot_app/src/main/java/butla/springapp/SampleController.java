@@ -14,25 +14,34 @@
  * limitations under the License.
  */
 
-package butla.actuator;
+package butla.springapp;
 
-import java.util.Collections;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Description;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-@Controller
-@Description("A controller for handling requests for hello messages")
+@RestController
 public class SampleController {
 
-	@RequestMapping("/")
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	@ResponseBody
 	public String helloWorld() {
 		return "Hello World\n";
+	}
+
+	@RequestMapping(value = "/", method = RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, String> forBenchmark(@RequestBody HashMap<String, String> request) {
+		HashMap<String, String> filtered = new HashMap<String, String>();
+		for(Map.Entry<String, String> entry : request.entrySet())
+		{
+			if(entry.getKey().toLowerCase().startsWith("a"))
+			{
+				filtered.put(entry.getKey(), entry.getValue());
+			}
+		}
+		return filtered;
 	}
 
 	@RequestMapping("/foo")

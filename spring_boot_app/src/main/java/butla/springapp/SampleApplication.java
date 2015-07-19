@@ -14,22 +14,16 @@
  * limitations under the License.
  */
 
-package butla.actuator;
+package butla.springapp;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@Configuration
-@EnableAutoConfiguration
-@EnableConfigurationProperties
-@ComponentScan
-public class SampleActuatorApplication {
+@SpringBootApplication
+public class SampleApplication {
 
 	public static void main(String[] args) throws Exception {
-		SpringApplication.run(SampleActuatorApplication.class, args);
+		SpringApplication.run(SampleApplication.class, args);
 	}
 
 }
