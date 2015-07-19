@@ -2,19 +2,17 @@ import ddt
 import json
 from falcon import testing
 
-import app
+from falcon_app.app import app
 
-# TODO: Pokaz trick z importowaniem apki dopiero po ustawieniu sciemnianego kontekstu do testow
-# Albo moze jakos inaczej konfiguracje rozwiazac
 
 @ddt.ddt
 class SampleTest(testing.TestBase):
     def setUp(self):
         super().setUp()
-        self.api = app.app
+        self.api = app
 
     def test_sample_get(self):
-        self.assertEquals(
+        self.assertEqual(
             self.simulate_request('/', decode='utf-8'),
             'Hello world\n'
         )
@@ -35,7 +33,7 @@ class SampleTest(testing.TestBase):
             headers=[('Content-type', 'application/json')]
         )
 
-        self.assertEquals(
+        self.assertEqual(
             response,
             json.dumps(expected_dict)
         )

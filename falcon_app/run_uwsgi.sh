@@ -1,1 +1,1 @@
-uwsgi --http :9090 --module app:app --enable-threads --disable-logging
+uwsgi --http :9090 --module falcon_app.app:app --enable-threads --disable-logging

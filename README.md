@@ -19,7 +19,7 @@ It will also contain microservices in other technologies for comparison and perf
 
 ## W skrócie o PaaSie
 1. Co nam daje PaaS?
- * łatwe skalowanie
+ * łaasdasdasdtwe skalowanie
  * routing
  * łatwy deployment
  * weź jakąś oficjalną propagandę
@@ -32,7 +32,7 @@ It will also contain microservices in other technologies for comparison and perf
 1. monitoring na produkcji (z latającymi co jakiś czas testami)
 
 ## General microservice work tips
-1. *TODO (Iza)* Does Heroku or Azure or other PaaSes have the mechanism of binding applications to each other or to services? Also look at Google App Engine and Python Anywhere.
+1. *TODO (Iza)* Doasdasdasdes Heroku or Azure or other PaaSes have the mechanism of binding applications to each other or to services? Also look at Google App Engine and Python Anywhere.
 1. *TODO (Iza)* How does Cloud Foundry and Heroku assign processor time? Should we do tests on one or a few processors (of a VM)?
 1. Stosować się oczywiście do 12-factor app i różnych mądrych porad (np. o testowaniu od Fowlera)
 1. Stosować się do przykazań RESTa (kiedy używa się RESTa, co pewnie będzie się najczęściej działo)
@@ -130,6 +130,7 @@ You can, of course, use other Python version and another framework and be succes
 
 # Findings
 1. Docker can throttle CPU time by relative share size or by assigning to a certain core (or both). More [here](https://goldmann.pl/blog/2014/09/11/resource-management-in-docker/)
+1. Multiple cores are available for the app in CF. uWSGI communicated that while starting.
 
 # Benchmarking
 Performance tests done with Gatling.

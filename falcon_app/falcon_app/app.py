@@ -6,11 +6,6 @@ class SampleResource:
     def on_get(req, resp):
         resp.body = 'Hello world\n'
 
-        #file_path = '/media/butla/Dane/Filmy/widziane/BLADE [1998-Eng-DVDrip]-haSak/BLADE [1998-Eng-DVDrip]-haSak.avi'
-        #resp.content_type = 'video/x-msvideo'
-        #resp.stream = open(file_path, 'rb')
-        #resp.stream_len = os.path.getsize(file_path)
-
     @staticmethod
     def on_post(req, resp):
         '''
