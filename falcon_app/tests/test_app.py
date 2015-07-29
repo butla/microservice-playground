@@ -69,6 +69,6 @@ class SampleTest(testing.TestBase):
         )
 
         self.assertEqual(
-            response,
-            json.dumps(expected_dict)
+            json.loads(response),
+            expected_dict
         )
