@@ -1,4 +1,4 @@
-falcon_app/.vagrant/
+**.vagrant/
 
 # IDEA hidden files
 .idea/
