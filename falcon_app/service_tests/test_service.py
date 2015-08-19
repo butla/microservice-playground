@@ -22,7 +22,7 @@ class TestService:
     def _start_mountebank(cls):
         mb_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../tools/mountebank-v1.2.122-linux-x64')
         # TODO this should wait for the endpoint to get up
-        mb_proc = subprocess.Popen(mb_path, shell=True)
+        mb_proc = subprocess.Popen(mb_path)
         return mb_proc
 
     @staticmethod
@@ -64,7 +64,7 @@ class TestService:
 
         project_root_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..')
         os.chdir(project_root_path)
-        app_proc = subprocess.Popen('gunicorn falcon_app.app:app --bind :9090', shell=True)
+        app_proc = subprocess.Popen(['gunicorn', 'falcon_app.app:app', '--bind', ':9090'])
         # TODO wait for start
         return app_proc
 
