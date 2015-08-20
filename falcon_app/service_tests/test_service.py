@@ -9,21 +9,25 @@ class TestService:
     def setup_class(cls):
         cls._app_process = cls._start_app()
         cls._mb_process = cls._start_mountebank()
-        time.sleep(4)
+        time.sleep(1)
         TestService._configure_mountebank()
 
     @classmethod
     def teardown_class(cls):
-        cls._mb_process.kill()
+        cls._stop_mountebank()
         cls._app_process.kill()
-        # or os.killpg(pro.pid, signal.SIGTERM)
 
     @classmethod
     def _start_mountebank(cls):
-        mb_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../tools/mountebank-v1.2.122-linux-x64')
+        mb_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../tools/mountebank-v1.2.122-linux-x64/mb')
         # TODO this should wait for the endpoint to get up
         mb_proc = subprocess.Popen(mb_path)
         return mb_proc
+
+    @classmethod
+    def _stop_mountebank(cls):
+        mb_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../tools/mountebank-v1.2.122-linux-x64/mb')
+        subprocess.check_call([mb_path, 'stop'])
 
     @staticmethod
     def _configure_mountebank():
@@ -73,4 +77,5 @@ class TestService:
         os.environ['EXT_SERVICE_URL'] = 'http://localhost:4545'
 
     def test_service_chatty_endpoint(self):
-        assert requests.post('http://localhost:9090', json={'A': 1, 'B': 4}) == 15
+        returned_value = requests.post('http://localhost:9090/chatty', json={'A': 1, 'B': 4}).json()
+        assert returned_value == 15
