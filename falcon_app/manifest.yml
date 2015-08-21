@@ -1,7 +1,7 @@
 ---
 applications:
 - name: falcon-test
-  command: uwsgi --http :$VCAP_APP_PORT --module app:app --enable-threads --disable-logging
+  command: gunicorn falcon_app.app:app --bind :$VCAP_APP_PORT --enable-stdio-inheritance
   memory: 128M
   buildpack: python_buildpack 
   env:

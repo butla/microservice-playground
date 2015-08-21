@@ -1,5 +1,6 @@
 **.vagrant/
 falcon_app/tools/mountebank-v1.2.122-linux-x64/
+falcon_app/falcon_app.iml
 
 # IDEA hidden files
 .idea/
