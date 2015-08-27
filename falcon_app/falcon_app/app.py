@@ -2,12 +2,15 @@ import falcon
 import json
 import os
 import requests
+import logging
 
 
 class SampleResource:
     @staticmethod
     def on_get(req, resp):
         resp.body = 'Hello world\n'
+        logging.info('info')
+        logging.error('error')
 
     @staticmethod
     def on_post(req, resp):
@@ -51,3 +54,5 @@ EXTERNAL_ENDPOINT = os.getenv('EXT_SERVICE_URL', '')
 app = falcon.API()
 app.add_route('/', SampleResource())
 app.add_route('/chatty', ChattyResource(EXTERNAL_ENDPOINT))
+
+logging.basicConfig(level=logging.INFO)
