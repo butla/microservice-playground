@@ -2,14 +2,17 @@ import os
 import requests
 import subprocess
 import time
+import socket
+import logging
 
+from urllib.parse import urlparse
 
 class TestService:
     @classmethod
     def setup_class(cls):
         cls._app_process = cls._start_app()
         cls._mb_process = cls._start_mountebank()
-        time.sleep(1)
+
         TestService._configure_mountebank()
 
     @classmethod
@@ -22,12 +25,40 @@ class TestService:
         mb_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../tools/mountebank-v1.2.122-linux-x64/mb')
         # TODO this should wait for the endpoint to get up
         mb_proc = subprocess.Popen(mb_path)
+        try:
+            TestService._wait_for_endpoint('http://localhost:2525/imposters')
+        except Exception:
+            logging.exception("Mountebank didn't start")
+            TestService._stop_mountebank()
+            raise
+
         return mb_proc
 
-    @classmethod
-    def _stop_mountebank(cls):
+    @staticmethod
+    def _stop_mountebank():
         mb_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../tools/mountebank-v1.2.122-linux-x64/mb')
         subprocess.check_call([mb_path, 'stop'])
+
+    @staticmethod
+    def _wait_for_endpoint(url, timeout=5.0):
+        """
+        Waits for the HTTP endpoint to appear by trying to connect to it with TCP.
+        :param str url: Service url, e.g. "http://localhost:2525/imposters". Port needs to be specified.
+        :rtype: None
+        """
+        parserd_url = urlparse(url)
+        host, port_str = parserd_url.netloc.split(':')
+        port = int(port_str)
+
+        start_time = time.perf_counter()
+        while True:
+            try:
+                with socket.create_connection((host, port)):
+                    break
+            except ConnectionRefusedError:
+                time.sleep(0.001)
+                if time.perf_counter() - start_time >= timeout:
+                    raise TimeoutError('Waited too long fot the process')
 
     @staticmethod
     def _configure_mountebank():
@@ -69,7 +100,14 @@ class TestService:
         project_root_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..')
         os.chdir(project_root_path)
         app_proc = subprocess.Popen(['gunicorn', 'falcon_app.app:app', '--bind', ':9090'])
-        # TODO wait for start
+
+        try:
+            TestService._wait_for_endpoint('http://localhost:9090')
+        except Exception:
+            logging.exception("App didn't start")
+            app_proc.kill()
+            raise
+
         return app_proc
 
     @staticmethod
