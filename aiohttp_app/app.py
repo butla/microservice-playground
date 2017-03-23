@@ -8,7 +8,7 @@ import uvloop
 async def handle_get(request):
     # schedule something to run in the background
     # asyncio.get_event_loop().create_task(background_stuff())
-    return web.Response(text='Hello world')
+    return web.Response(text='Hello, world')
 
 
 async def handle_post(request):
