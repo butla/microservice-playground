@@ -7,5 +7,5 @@ if [ ! -a ${executable} ]; then
     go build -o ${executable} ${root_dir}/app.go
 fi
 
-${executable}
+GOMAXPROCS=1 ${executable}
 
