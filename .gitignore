@@ -1,4 +1,7 @@
 **.vagrant/
+venv/
+
+go_app/app
 falcon_app/tools/mountebank-v1.2.122-linux-x64/
 
 # IDEA hidden files
