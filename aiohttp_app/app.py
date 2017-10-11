@@ -28,7 +28,7 @@ async def init_app(loop):
     #app.router.add_route('GET', '/{name}', handle)
 
     srv = await loop.create_server(app.make_handler(), '0.0.0.0', 9090)
-    print("Server started at http://0.0.0.0:9090")
+    print("Server started at http://0.0.0.0:9090", flush=True)
     return srv
 
 
@@ -41,4 +41,3 @@ asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
 loop = asyncio.get_event_loop()
 loop.run_until_complete(init_app(loop))
 loop.run_forever()
-
