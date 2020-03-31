@@ -1,2 +1,5 @@
+develop:
+	ls app.py | entr -rc python app.py
+
 run:
-	ls app.py | entr -rc python3 app.py
+	python app.py
