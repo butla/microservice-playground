@@ -21,15 +21,12 @@ async def handle_post(request):
             content_type='application/json')
 
 
-async def init_app(loop):
-    app = web.Application(loop=loop)
+def init_app():
+    app = web.Application()
     app.router.add_route('GET', '/', handle_get)
     app.router.add_route('POST', '/', handle_post)
-    #app.router.add_route('GET', '/{name}', handle)
-
-    srv = await loop.create_server(app.make_handler(), '0.0.0.0', 9090)
-    print("Server started at http://0.0.0.0:9090", flush=True)
-    return srv
+    # app.router.add_route('GET', '/{name}', handle)
+    return app
 
 
 async def background_stuff():
@@ -37,7 +34,7 @@ async def background_stuff():
     print("5 seconds passed since a call...")
 
 
-asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
-loop = asyncio.get_event_loop()
-loop.run_until_complete(init_app(loop))
-loop.run_forever()
+if __name__ == '__main__':
+    uvloop.install()
+    app = init_app()
+    web.run_app(app, port=9090)

@@ -1,10 +1,8 @@
-$ wrk --connections 10 --duration 60 --threads 2 http://localhost:9090
-Running 1m test @ http://localhost:9090
-  2 threads and 10 connections
+Running 30s test @ http://localhost:9090
+  2 threads and 8 connections
   Thread Stats   Avg      Stdev     Max   +/- Stdev
-    Latency     1.38ms  537.99us  21.07ms   83.60%
-    Req/Sec     3.69k   369.72     4.36k    86.08%
-  440995 requests in 1.00m, 68.55MB read
-Requests/sec:   7348.35
-Transfer/sec:      1.14MB
-
+    Latency     1.14ms  107.25us   4.29ms   84.76%
+    Req/Sec     3.50k    70.27     3.73k    76.00%
+  208861 requests in 30.00s, 32.47MB read
+Requests/sec:   6961.96
+Transfer/sec:      1.08MB
