@@ -10,4 +10,4 @@ if [ ! -d ${venv_dir} ]; then
     ${v_python} -m pip install -r ${root_dir}/requirements.txt
 fi
 
-${v_python} ${root_dir}/app.py
+exec ${v_python} ${root_dir}/app.py
