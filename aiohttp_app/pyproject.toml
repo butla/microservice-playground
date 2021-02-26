@@ -7,7 +7,7 @@ license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.8"
-aiohttp = "^3.6"
+aiohttp = "^3.7"
 uvloop = "^0.14.0"
 
 [tool.poetry.dev-dependencies]
